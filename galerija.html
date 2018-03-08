@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Plamen v električnem polju</title>
+<link href="http://fonts.googleapis.com/css?family=Arvo" rel="stylesheet" type="text/css" />
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="jquery.poptrox-1.0.js"></script>
+<script type="text/javascript">
+    function get_arr_holder(pics) {
+        var arr_holder = $("<div></div>");
+        arr_holder.css("position", "absolute")
+        .css("width", "100%")
+        .css("height", "100%");
+        
+        var mglass = $("<img />");
+        mglass.css("height", "12%")
+        .css("cursor", "pointer")
+        .css("margin-left", "85%")
+        .css("position", "absolute")
+        .css("margin-top", "62%");
+        mglass.attr("src", "images/magnifying-glass.png");
+        
+        var left = $("<img/>");
+        left.css("height", "30%")
+        .css("cursor", "pointer")
+        .css("margin-top", "25%");
+        var right = left.clone();
+        
+        left.attr("src", "images/left.png");
+        right.attr("src", "images/right.png");
+        left.css("float", "left");
+        right.css("float", "right")
+        .css("margin-right", "20px");
+        
+        var n = pics.length;
+        function find_pic() {
+            var pic = $(">img", arr_holder.parent());
+            var src = pic[0].src;
+            
+            for (var k in pics) {
+                if (src.indexOf(pics[k]) > 0){
+                    return parseInt(k);
+                }
+            }
+            return 0;
+        }
+        
+        mglass[0].onclick = function() {
+            location.assign($(">img", arr_holder.parent())[0].src);
+        };
+            
+        left[0].onclick = function(event) {
+            var i = find_pic();
+            $(">img", arr_holder.parent())[0].src = "images/gallery/" + pics[(n+i-1) % n] + ".jpg";
+        };
+        
+        right[0].onclick = function(event) {
+            var i = find_pic();
+            $(">img", arr_holder.parent())[0].src = "images/gallery/" + pics[(i+1) % n] + ".jpg";
+        };
+        
+        arr_holder.append(mglass);
+        arr_holder.append(left);
+        arr_holder.append(right);
+        
+        return arr_holder;
+    }
+</script>
+
+<script type="text/javascript">
+    function populate_gallery(container, pictures) {
+        var gallery = $(".gallery", container);
+        gallery.html("");
+        var arr_holder = get_arr_holder(pictures);
+        var n = 3;
+        for (var i in pictures) {
+            var pic = "images/gallery/" + pictures[i];
+            var li = $("<li></li>");
+            if (i % n == 0){
+                li.addClass("nopad");
+            }
+            li.html("<a href='" + pic + ".jpg'><img src='" + pic + "_s.jpg' width='230'></img></a>");
+            gallery.append(li);
+        }
+        gallery.poptrox({
+            popupCloserBackgroundColor: '#E55311',
+            popupPadding: 10,
+            windowMargin: 20,
+            pageChanger: arr_holder
+        });
+    }
+    $(document).ready(function() {
+        $(".gallery").html("");
+        //var pictures = ["CAM00232", "CAM00332", "CAM00334", "CAM00335", "CAM00345", "CAM00355"];
+        var gallery1 = ['CAM00124', 'CAM00125', 'CAM00127', 'CAM00128', 'CAM00160', 'CAM00162',
+                        'CAM00171', 'CAM00178', 'CAM00191', 'CAM00195', 'CAM00203', 'CAM00217',
+                        'CAM00218', 'CAM00222', 'CAM00233', 'CAM00234', 'CAM00279'];
+        var gallery2 = ['CAM00245', 'CAM00247', 'CAM00253', 'CAM00259', 'CAM00267'];
+        var gal3 = ['CAM00332', 'CAM00334', 'CAM00336', 'CAM00347'];
+        var gal4 = ['CAM00349', 'CAM00350', 'CAM00352', 'CAM00354'];
+        var gal5 = ['CAM00361', 'CAM00362', 'CAM00364', 'CAM00366', 'CAM00370'];
+        var gal6 = ['CAM00371', 'CAM00373', 'CAM00376', 'CAM00378', 'CAM00383'];
+        populate_gallery($("#gallery1"), gallery1);
+        populate_gallery($("#gallery2"), gallery2);
+        populate_gallery($("#gallery3"), gal3);
+        populate_gallery($("#gallery4"), gal4);
+        populate_gallery($("#gallery5"), gal5);
+        populate_gallery($("#gallery6"), gal6);
+    });
+</script> 
+</head>
+<body>
+<div id="header-wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><a href="index.html">Plamen v električnem polju</a></h1>
+		</div>
+	</div>
+	<div id="menu">
+		<ul>
+			<li><a href="index.html">Domov</a></li>
+			<li><a href="ekipa.html">Ekipa</a></li>
+			<li><a href="teorija.html">Teorija</a></li>
+			<li><a href="delo.html">Delo in merive</a></li>
+			<li><a href="ugotovitve.html">Ugotovitve</a></li>
+			<li class="current_page_item"><a href="galerija.html">Galerija</a></li>
+		</ul>
+	</div>
+</div>
+<!-- end #header -->
+<div id="wrapper">
+	<div id="page">
+		<div id="box1">
+            <h1>Slike</h1>
+        </div>
+        <div class="poptrox" id="gallery1"> 
+			<ul class="gallery">
+                <h1> POZOR! </h1>
+                Pozdravljen spoštovani obiskovalec naše spletne strani. Za ogled galerije potrebujete brskalnik,
+                ki ima omogočen Javascript. Toplo priporočamo Google Chrome, Mozzila Firefox ali Opero.
+                Lahko pa pogledate direktno v <a href="images/gallery/">datoteko z vsemi slikami</a>. Hvala za razumevanje.
+			</ul>
+        </div>
+        <div class="poptrox" id="gallery2">
+			<ul class="gallery"></ul>
+		</div>
+        <div class="poptrox" id="gallery3">
+			<ul class="gallery"></ul>
+		</div>
+        <div class="poptrox" id="gallery4">
+			<ul class="gallery"></ul>
+		</div>
+        <div class="poptrox" id="gallery5">
+			<ul class="gallery"></ul>
+		</div>
+        <div class="poptrox" id="gallery6">
+			<ul class="gallery"></ul>
+		</div>
+	</div>
+</div>
+<div id="footer">
+	<p>&copy; Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FreeCSSTemplates.org</a>. Content by <a href="http://www.fmf.uni-lj.si">FMF</a> and its students.</p>
+</div>
+<!-- end #footer -->
+</body>
+</html>
